@@ -1,9 +1,10 @@
-import React, { useState } from "react";
-import ColorfulMessage from "./components/ColorfulMessage";
+import React, { useEffect, useState } from "react";
+import { ColorfulMessage } from "./components/ColorfulMessage";
 
 const App = () => {
+  console.log("最初");
   const [num, setNum] = useState(0);
-  const [faceShow, setFaceShow] = useState(true);
+  const [faceShow, setFaceShow] = useState(false);
 
   const onClickCountButton = () => {
     setNum(num + 1);
@@ -11,6 +12,17 @@ const App = () => {
   const switchShowButton = () => {
     setFaceShow(!faceShow);
   };
+
+  useEffect(() => {
+    if (num > 0) {
+      if (num % 3 === 0) {
+        faceShow || setFaceShow(true);
+      } else {
+        faceShow && setFaceShow(false);
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [num]);
 
   return (
     <>
